@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To My Chuchu 💖</title>
+<style>
+/* ===== GLOBAL ===== */
+* {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif;}
+body, html {width:100%; height:100%; overflow-x:hidden; background: linear-gradient(to bottom, #ffe6f0, #ffb3d9);}
+button {cursor:pointer; padding:12px 25px; border:none; border-radius:12px; font-size:1.2em; background: #ff4da6; color:white; transition:0.3s;}
+button:hover {background:#ff1a75;}
+h1,h2,h3,p {text-align:center; color:#ff0066; margin-bottom:15px;}
+
+/* ===== HERO ===== */
+#hero {position:relative; width:100%; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;}
+#hero h1 {font-size:3em; text-shadow: 2px 2px 15px #fff;}
+#enterBtn {margin-top:20px;}
+#flowerContainer, #balloonContainer {position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0;}
+
+/* ===== PARAGRAPHS ===== */
+#paragraphs {display:none; padding:50px 20px; text-align:center;}
+#paragraphs img {width:250px; height:250px; object-fit:cover; border-radius:20px; margin-bottom:20px; transition:0.3s;}
+#paragraphs img:hover {transform: scale(1.1); box-shadow:0 0 20px pink;}
+
+/* ===== APOLOGY ===== */
+#apology {display:none; padding:50px 20px; text-align:center;}
+#apology .heart-btn {margin-top:20px; font-size:2em; animation: floatHeart 2s infinite alternate; cursor:pointer;}
+@keyframes floatHeart {0%{transform:translateY(0);}50%{transform:translateY(-10px);}100%{transform:translateY(0);}}
+
+/* ===== VALENTINE PROPOSAL ===== */
+#proposal {display:none; height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column; text-align:center;}
+#proposal h1 {font-size:3em; text-shadow: 2px 2px 20px #fff;}
+#proposal img {width:250px; height:250px; border-radius:20px; margin-top:20px; transition:0.3s;}
+#proposal img:hover {transform: scale(1.05); box-shadow:0 0 20px pink;}
+
+/* ===== CLOSING ===== */
+#closing {display:none; padding:50px 20px; text-align:center;}
+#closing h2 {font-size:2.5em; color:#ff3399; margin-bottom:20px;}
+.heart {position:absolute; font-size:2em; animation: floatUp 5s linear infinite; color:red;}
+@keyframes floatUp {0%{transform:translateY(0);}100%{transform:translateY(-800px); opacity:0;}}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div id="hero">
+    <h1>Hey Chuchu 💖</h1>
+    <h2>Welcome to our magical world 🌸🎈</h2>
+    <button id="enterBtn">Enter My Heart 💕</button>
+    <div id="flowerContainer"></div>
+    <div id="balloonContainer"></div>
+</div>
+
+<!-- PARAGRAPHS / EMOTIONAL MESSAGES -->
+<div id="paragraphs">
+    <img src="photo1.jpg" alt="Memory 1">
+    <p>"Chuchu, I know I have hurt you before and I am truly sorry 😢. I never want to see you sad. You are my world, my everything, my Sizzooni 💖."</p>
+    <p>"Every moment with you feels magical 🌸. Tum meri zindagi ka sabse pyara pal ho 💕. I promise to be a better Sizz for you, forever ❤️."</p>
+    <img src="photo2.jpg" alt="Memory 2">
+    <p>"You are my today, tomorrow, and forever. I will always cherish you, Chuchu 😘."</p>
+    <button id="nextToApology">Click for a Surprise ❤️</button>
+</div>
+
+<!-- APOLOGY INTERACTIVE -->
+<div id="apology">
+    <h2>Chuchu… I am sorry 😔</h2>
+    <p>"I know I have made mistakes, and I feel so bad for hurting you. Please forgive me 💖. You mean everything to me."</p>
+    <div class="heart-btn" onclick="confetti()">💖 Click this heart to forgive me 💖</div>
+    <button id="nextToProposal">Next</button>
+</div>
+
+<!-- VALENTINE PROPOSAL -->
+<div id="proposal">
+    <h1>Chuchu… Will you be my Valentine? 💘</h1>
+    <img src="couple_photo.jpg" alt="Us">
+</div>
+
+<!-- CLOSING / MUSIC -->
+<div id="closing">
+    <h2>I love you forever, Chuchu 💖</h2>
+    <p>"Always your Sizz ❤️"</p>
+    <audio id="bg-music" controls>
+        <source src="ajab_si.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<script>
+/* ===== FLOWERS & BALLOONS ===== */
+const flowerContainer = document.getElementById('flowerContainer');
+const balloonContainer = document.getElementById('balloonContainer');
+function createFlower() {
+    const f = document.createElement('div'); f.innerHTML='🌸';
+    f.style.position='absolute'; f.style.left=Math.random()*100+'vw';
+    f.style.top='-50px'; f.style.fontSize=Math.random()*30+20+'px';
+    flowerContainer.appendChild(f);
+    let y=0;
+    const interval = setInterval(()=>{y+=2; f.style.top=y+'px'; if(y>window.innerHeight){f.remove(); clearInterval(interval);}},20);
+}
+function createBalloon() {
+    const b = document.createElement('div'); b.innerHTML='🎈';
+    b.style.position='absolute'; b.style.left=Math.random()*100+'vw';
+    b.style.top=window.innerHeight+'px'; b.style.fontSize=Math.random()*40+30+'px';
+    balloonContainer.appendChild(b);
+    let y=window.innerHeight;
+    const interval = setInterval(()=>{y-=2; b.style.top=y+'px'; if(y<-50){b.remove(); clearInterval(interval);}},20);
+}
+setInterval(createFlower,500); setInterval(createBalloon,1000);
+
+/* ===== NAVIGATION ===== */
+document.getElementById('enterBtn').onclick = ()=>{
+    document.getElementById('hero').style.display='none';
+    document.getElementById('paragraphs').style.display='block';
+}
+document.getElementById('nextToApology').onclick = ()=>{
+    document.getElementById('paragraphs').style.display='none';
+    document.getElementById('apology').style.display='block';
+}
+document.getElementById('nextToProposal').onclick = ()=>{
+    document.getElementById('apology').style.display='none';
+    document.getElementById('proposal').style.display='block';
+    setTimeout(()=>{document.getElementById('closing').style.display='block';},3000);
+}
+
+/* ===== CONFETTI HEARTS ===== */
+function confetti(){
+    for(let i=0;i<30;i++){
+        const c = document.createElement('div');
+        c.innerHTML='❤️'; c.className='heart';
+        c.style.left=Math.random()*100+'vw';
+        c.style.fontSize=Math.random()*20+10+'px';
+        document.body.appendChild(c);
+        setTimeout(()=>{c.remove();},5000);
+    }
+}
+</script>
+</body>
+</html>
